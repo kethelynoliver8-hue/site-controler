@@ -65,11 +65,13 @@
 @media (max-width:767px){
   .hero{height:auto;min-height:0;max-height:none}
   /* O plano 16:9 permanece único; o recorte aproxima cidade e barras no mobile. */
-  .hero-inner{position:relative;display:block;min-height:clamp(610px,155vw,690px);padding-top:91px;overflow:hidden}
+  .hero-inner{position:relative;display:block;min-height:clamp(500px,120vw,540px);padding-top:91px;overflow:hidden}
   .hero-copy{position:relative;z-index:2;width:100%;padding-bottom:0}
-  .scene{position:absolute;top:auto;bottom:0;left:50%;width:max(760px,190vw);height:auto;aspect-ratio:16/9;transform:translateX(-70%)}
+  /* A mesma foto aparece suavemente sob o texto; a cena 16:9 mantém as barras alinhadas. */
+  .hero-copy::before{content:"";position:absolute;z-index:-1;inset:-82px 0 -18px;background:linear-gradient(90deg,#0b0b0dba,#0b0b0d50 85%),url('assets/images/bg-curitiba.webp') 61% 39%/1000px auto no-repeat;opacity:.58;mask-image:linear-gradient(180deg,transparent,#000 17%,#000 69%,transparent 100%);pointer-events:none}
+  .scene{position:absolute;top:-65px;bottom:auto;left:50%;width:max(1000px,240vw);height:auto;aspect-ratio:16/9;transform:translateX(-74%)}
   .scene-image{width:100%;height:100%;object-fit:cover}
-  .scene-shade{background:linear-gradient(180deg,#0b0b0dfa 0%,#0b0b0de8 25%,#0b0b0d8c 57%,#0b0b0d20 100%),linear-gradient(90deg,#0b0b0dd9 0%,#0b0b0d80 38%,transparent 80%)}
+  .scene-shade{background:linear-gradient(180deg,#0b0b0d85 0%,#0b0b0d7a 31%,#0b0b0d65 61%,#0b0b0d12 100%),linear-gradient(90deg,#0b0b0d8a 0%,#0b0b0d52 42%,transparent 85%)}
   .facts{grid-template-columns:repeat(2,minmax(0,1fr));min-height:145px;max-height:none;padding-right:12px}
 }
 
@@ -713,3 +715,9 @@ body.gallery-open{overflow:hidden}
   .income-preparation-grid,.income-trust-grid{grid-template-columns:minmax(0,1fr)}
   .income-trust p{padding-left:17px}
 }
+
+/* Somente a barra principal da página; componentes internos mantêm suas barras. */
+html{scrollbar-color:var(--red) var(--bg-2);scrollbar-width:thin}
+html::-webkit-scrollbar{width:10px}
+html::-webkit-scrollbar-track{background:var(--bg-2)}
+html::-webkit-scrollbar-thumb{background:var(--red);border:2px solid var(--bg-2);border-radius:8px}
