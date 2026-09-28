@@ -64,6 +64,12 @@
 }
 @media (max-width:767px){
   .hero{height:auto;min-height:0;max-height:none}
+  /* O plano 16:9 permanece único; o recorte aproxima cidade e barras no mobile. */
+  .hero-inner{position:relative;display:block;min-height:clamp(610px,155vw,690px);padding-top:91px;overflow:hidden}
+  .hero-copy{position:relative;z-index:2;width:100%;padding-bottom:0}
+  .scene{position:absolute;top:auto;bottom:0;left:50%;width:max(760px,190vw);height:auto;aspect-ratio:16/9;transform:translateX(-70%)}
+  .scene-image{width:100%;height:100%;object-fit:cover}
+  .scene-shade{background:linear-gradient(180deg,#0b0b0dfa 0%,#0b0b0de8 25%,#0b0b0d8c 57%,#0b0b0d20 100%),linear-gradient(90deg,#0b0b0dd9 0%,#0b0b0d80 38%,transparent 80%)}
   .facts{grid-template-columns:repeat(2,minmax(0,1fr));min-height:145px;max-height:none;padding-right:12px}
 }
 
@@ -133,19 +139,24 @@
 
 /* Entrada única: sem JS, nenhuma classe é adicionada e todo o conteúdo permanece visível. */
 @media (prefers-reduced-motion:no-preference){
-  .about.about-motion-ready:not(.is-visible) :is(.about-eyebrow,.about h2,.about-intro,.about-card){opacity:0;transform:translateY(12px)}
+  .about.about-motion-ready:not(.is-visible) :is(.about-eyebrow,.about h2,.about-intro){opacity:0;transform:translateY(12px)}
   .about.about-motion-ready:not(.is-visible) .about-since::before{transform:scaleY(0)}
-  .about.about-motion-ready.is-visible :is(.about-eyebrow,.about h2,.about-intro,.about-card){animation:about-enter .52s cubic-bezier(.22,1,.36,1) backwards}
+  .about.about-motion-ready.is-visible :is(.about-eyebrow,.about h2,.about-intro){animation:about-enter .52s cubic-bezier(.22,1,.36,1) backwards}
   .about.about-motion-ready.is-visible .about-eyebrow{animation-delay:0s}
   .about.about-motion-ready.is-visible h2{animation-delay:.09s}
   .about.about-motion-ready.is-visible .about-intro{animation-delay:.18s}
-  .about.about-motion-ready.is-visible .about-card:nth-child(1){animation-delay:.31s}
-  .about.about-motion-ready.is-visible .about-card:nth-child(2){animation-delay:.43s}
-  .about.about-motion-ready.is-visible .about-card:nth-child(3){animation-delay:.55s}
   .about.about-motion-ready.is-visible .about-since::before{animation:about-rule .52s .09s cubic-bezier(.22,1,.36,1) backwards}
 }
 @keyframes about-enter{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
 @keyframes about-rule{from{transform:scaleY(0)}to{transform:scaleY(1)}}
+/* Cada card é revelado quando ele próprio entra na tela; sem JS, permanece visível. */
+@media (prefers-reduced-motion:no-preference){
+  .about-card.card-motion-ready:not(.is-revealed){opacity:0;transform:translateY(14px)}
+  .about-card.card-motion-ready.is-revealed{animation:about-enter .56s cubic-bezier(.22,1,.36,1) backwards}
+  .about-card.card-motion-ready:nth-child(2).is-revealed{animation-delay:.09s}
+  .about-card.card-motion-ready:nth-child(3).is-revealed{animation-delay:.18s}
+}
+
 
 /* A interação é exclusiva de ponteiros precisos; o reflexo fica atrás do conteúdo. */
 @media (hover:hover) and (pointer:fine) and (prefers-reduced-motion:no-preference){
@@ -161,7 +172,7 @@
   .about-button:hover .about-button-arrow{transform:translateX(5px)}
 }
 @media (prefers-reduced-motion:reduce){
-  .about.about-motion-ready :is(.about-eyebrow,.about h2,.about-intro,.about-card){opacity:1;transform:none}
+  .about.about-motion-ready :is(.about-eyebrow,.about h2,.about-intro){opacity:1;transform:none}
   .about.about-motion-ready .about-since::before{transform:none}
   .about-closing::before{opacity:0}
 }

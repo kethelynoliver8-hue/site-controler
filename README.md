@@ -33,4 +33,6 @@ Projeto estático em HTML, CSS e JavaScript, sem biblioteca de animação. Abra 
 
 Teste em 360, 768, 1280 e 1920 px. Verifique menu e submenu com mouse, toque e teclado; links de WhatsApp; preferência do sistema por movimento reduzido; os seis depoimentos por setas e gesto lateral no celular; as seis fotos ampliadas com clique, setas e Esc; o formulário nas três situações; e o alinhamento das barras após trocar a imagem.
 
-- Após atualizar no GitHub Pages, o parâmetro de versão em `styles.css?v=20260928-3` força o navegador a buscar a folha corrigida em vez de reaproveitar uma cópia antiga em cache. Atualize esse valor em todas as páginas quando alterar a tipografia futuramente.
+- Após atualizar no GitHub Pages, o parâmetro de versão em `styles.css?v=20260928-4` força o navegador a buscar a folha corrigida em vez de reaproveitar uma cópia antiga em cache. Atualize esse valor em todas as páginas quando alterar a tipografia futuramente.
+
+- Na home, o recorte mobile da cena e seu degradê ficam no bloco `@media (max-width:767px)` de `styles.css`; a imagem e o SVG das barras continuam no mesmo plano 16:9. Os cards de “Quem Somos” são observados individualmente em `script.js` e permanecem visíveis sem JavaScript ou com movimento reduzido.

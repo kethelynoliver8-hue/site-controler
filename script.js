@@ -46,6 +46,20 @@ if(aboutSection && 'IntersectionObserver' in window && !reducedMotion.matches){
   });
 }
 
+/* Cards: observados individualmente para o efeito acontecer também ao rolar no celular. */
+const aboutCards=[...document.querySelectorAll('.about-card')];
+if(aboutCards.length && 'IntersectionObserver' in window && !reducedMotion.matches){
+  const cardObserver=new IntersectionObserver(entries=>{
+    entries.forEach(entry=>{
+      if(entry.isIntersecting){entry.target.classList.add('is-revealed');cardObserver.unobserve(entry.target)}
+    });
+  },{threshold:.12,rootMargin:'0px 0px -8% 0px'});
+  aboutCards.forEach(card=>{cardObserver.observe(card);card.classList.add('card-motion-ready')});
+  reducedMotion.addEventListener('change',()=>{
+    if(reducedMotion.matches){aboutCards.forEach(card=>card.classList.add('is-revealed'));cardObserver.disconnect()}
+  });
+}
+
 /* Calcula o reflexo apenas enquanto um mouse está sobre a faixa. */
 const aboutClosing=document.querySelector('.about-closing');
 const precisePointer=window.matchMedia('(hover: hover) and (pointer: fine)');
