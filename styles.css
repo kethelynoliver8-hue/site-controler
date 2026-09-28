@@ -68,6 +68,9 @@
   /* Foto sob toda a composição. O sombreado se concentra à esquerda, atrás das letras. */
   .hero-inner::before{content:"";position:absolute;inset:0;z-index:0;pointer-events:none;background:linear-gradient(90deg,#0b0b0dca 0%,#0b0b0d76 58%,#0b0b0d37 100%),linear-gradient(180deg,#0b0b0d74 0%,transparent 38%,#0b0b0d2e 100%),url('assets/images/bg-curitiba.webp') 61% 39%/1000px auto no-repeat}
   .hero-copy{position:relative;z-index:2;width:100%;padding-top:clamp(138px,10vw + 100px,148px);padding-bottom:0}
+  /* Sombra localizada apenas sob o título e o parágrafo; as bordas se dissolvem na cena. */
+  .hero-legibility{position:relative;isolation:isolate;display:flow-root}
+  .hero-legibility::before{content:"";position:absolute;z-index:-1;inset:-30px -28px -10px;pointer-events:none;background:radial-gradient(ellipse 84% 75% at 44% 48%,#0b0b0df2 0%,#0b0b0ddd 51%,#0b0b0d84 76%,transparent 100%);mask-image:linear-gradient(to bottom,transparent,#000 24%,#000 72%,transparent)}
   /* O SVG conserva o plano 16:9, acima da foto e abaixo do texto. */
   .scene{position:absolute;z-index:1;top:-65px;bottom:auto;left:50%;width:max(1000px,240vw);height:auto;aspect-ratio:16/9;transform:translateX(-74%)}
   .scene-image,.scene-shade,.greenhouse-light,.lake-light{display:none}
