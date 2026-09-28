@@ -64,16 +64,17 @@
 }
 @media (max-width:767px){
   .hero{height:auto;min-height:0;max-height:none}
-  /* O plano 16:9 permanece único; o recorte aproxima cidade e barras no mobile. */
-  .hero-inner{position:relative;display:block;min-height:clamp(500px,120vw,540px);padding-top:91px;overflow:hidden}
-  .hero-copy{position:relative;z-index:2;width:100%;padding-bottom:0}
-  /* A mesma foto aparece suavemente sob o texto; a cena 16:9 mantém as barras alinhadas. */
-  .hero-copy::before{content:"";position:absolute;z-index:-1;inset:-82px 0 -18px;background:linear-gradient(90deg,#0b0b0dba,#0b0b0d50 85%),url('assets/images/bg-curitiba.webp') 61% 39%/1000px auto no-repeat;opacity:.58;mask-image:linear-gradient(180deg,transparent,#000 17%,#000 69%,transparent 100%);pointer-events:none}
-  .scene{position:absolute;top:-65px;bottom:auto;left:50%;width:max(1000px,240vw);height:auto;aspect-ratio:16/9;transform:translateX(-74%)}
-  .scene-image{width:100%;height:100%;object-fit:cover}
-  .scene-shade{background:linear-gradient(180deg,#0b0b0d85 0%,#0b0b0d7a 31%,#0b0b0d65 61%,#0b0b0d12 100%),linear-gradient(90deg,#0b0b0d8a 0%,#0b0b0d52 42%,transparent 85%)}
+  .hero-inner{position:relative;display:block;min-height:clamp(525px,124vw,560px);padding-top:91px;overflow:hidden}
+  /* Foto sob toda a composição. O sombreado se concentra à esquerda, atrás das letras. */
+  .hero-inner::before{content:"";position:absolute;inset:0;z-index:0;pointer-events:none;background:linear-gradient(90deg,#0b0b0dca 0%,#0b0b0d76 58%,#0b0b0d37 100%),linear-gradient(180deg,#0b0b0d74 0%,transparent 38%,#0b0b0d2e 100%),url('assets/images/bg-curitiba.webp') 61% 39%/1000px auto no-repeat}
+  .hero-copy{position:relative;z-index:2;width:100%;padding-top:clamp(38px,10vw,48px);padding-bottom:0}
+  /* O SVG conserva o plano 16:9, acima da foto e abaixo do texto. */
+  .scene{position:absolute;z-index:1;top:-65px;bottom:auto;left:50%;width:max(1000px,240vw);height:auto;aspect-ratio:16/9;transform:translateX(-74%)}
+  .scene-image,.scene-shade,.greenhouse-light,.lake-light{display:none}
+  .bar-image{animation-name:bar-rise-mobile;filter:drop-shadow(0 0 4px #e31b234d)}
   .facts{grid-template-columns:repeat(2,minmax(0,1fr));min-height:145px;max-height:none;padding-right:12px}
 }
+@keyframes bar-rise-mobile{from{transform:translateY(var(--rise));opacity:0}65%{opacity:1}to{transform:translateY(0);opacity:1}}
 
 /* Botão flutuante WhatsApp: substitui integralmente os seletores antigos. */
 .whatsapp-float {
