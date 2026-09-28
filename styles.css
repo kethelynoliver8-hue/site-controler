@@ -64,10 +64,10 @@
 }
 @media (max-width:767px){
   .hero{height:auto;min-height:0;max-height:none}
-  .hero-inner{position:relative;display:block;min-height:clamp(525px,124vw,560px);padding-top:91px;overflow:hidden}
+  .hero-inner{position:relative;display:block;min-height:clamp(575px,124vw + 50px,610px);padding-top:91px;overflow:hidden}
   /* Foto sob toda a composição. O sombreado se concentra à esquerda, atrás das letras. */
   .hero-inner::before{content:"";position:absolute;inset:0;z-index:0;pointer-events:none;background:linear-gradient(90deg,#0b0b0dca 0%,#0b0b0d76 58%,#0b0b0d37 100%),linear-gradient(180deg,#0b0b0d74 0%,transparent 38%,#0b0b0d2e 100%),url('assets/images/bg-curitiba.webp') 61% 39%/1000px auto no-repeat}
-  .hero-copy{position:relative;z-index:2;width:100%;padding-top:clamp(38px,10vw,48px);padding-bottom:0}
+  .hero-copy{position:relative;z-index:2;width:100%;padding-top:clamp(138px,10vw + 100px,148px);padding-bottom:0}
   /* O SVG conserva o plano 16:9, acima da foto e abaixo do texto. */
   .scene{position:absolute;z-index:1;top:-65px;bottom:auto;left:50%;width:max(1000px,240vw);height:auto;aspect-ratio:16/9;transform:translateX(-74%)}
   .scene-image,.scene-shade,.greenhouse-light,.lake-light{display:none}
