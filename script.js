@@ -6,13 +6,13 @@ const servicesButton=document.querySelector('.dropdown-trigger');
 const mobileQuery=window.matchMedia('(max-width: 1199px)');
 const reducedMotion=window.matchMedia('(prefers-reduced-motion: reduce)');
 
-function closeDropdown(){dropdown.classList.remove('is-open');servicesButton.setAttribute('aria-expanded','false')}
+function closeDropdown(){dropdown.classList.remove('is-open');dropdown.classList.add('is-dismissed');servicesButton.setAttribute('aria-expanded','false')}
 function closeMenu(){menu.classList.remove('is-open');menuButton.setAttribute('aria-expanded','false');menuButton.setAttribute('aria-label','Abrir menu');closeDropdown()}
-function toggleDropdown(){const opened=dropdown.classList.toggle('is-open');servicesButton.setAttribute('aria-expanded',String(opened))}
+function toggleDropdown(){dropdown.classList.remove('is-dismissed');const opened=dropdown.classList.toggle('is-open');servicesButton.setAttribute('aria-expanded',String(opened))}
 
 menuButton.addEventListener('click',()=>{const opened=menu.classList.toggle('is-open');menuButton.setAttribute('aria-expanded',String(opened));menuButton.setAttribute('aria-label',opened?'Fechar menu':'Abrir menu');if(!opened)closeDropdown()});
 servicesButton.addEventListener('click',toggleDropdown);
-dropdown.addEventListener('mouseenter',()=>{if(!mobileQuery.matches)servicesButton.setAttribute('aria-expanded','true')});
+dropdown.addEventListener('mouseenter',()=>{if(!mobileQuery.matches){dropdown.classList.remove('is-dismissed');servicesButton.setAttribute('aria-expanded','true')}});
 dropdown.addEventListener('mouseleave',()=>{if(!mobileQuery.matches&&!dropdown.classList.contains('is-open'))servicesButton.setAttribute('aria-expanded','false')});
 dropdown.addEventListener('focusout',event=>{if(!mobileQuery.matches&&!dropdown.contains(event.relatedTarget))closeDropdown()});
 document.addEventListener('pointerdown',event=>{if(!dropdown.contains(event.target))closeDropdown();if(mobileQuery.matches&&!event.target.closest('.nav-bar'))closeMenu()});
@@ -193,10 +193,9 @@ function buildContactMessage(data){
     'Olá, vim pelo site da Controler Contabilidade.',
     '',
     `Seu nome: ${data.name}`,
-    ...(data.situation==='Já tenho empresa'?[`Nome da empresa: ${data.company}`]:[]),
+    ...(data.company?[`Nome da empresa: ${data.company}`]:[]),
     `Cidade e estado: ${data.city}`,
     `Seu WhatsApp: ${data.phone}`,
-    `Qual é a sua situação?: ${data.situation}`,
     `Em que podemos ajudar?: ${data.subject}`,
     ...(data.message?[`Conte brevemente o que você precisa: ${data.message}`]:[]),
     ...(data.preference?[`Como prefere ser atendido?: ${data.preference}`]:[])
@@ -211,46 +210,32 @@ if(contactForm){
     company:contactForm.querySelector('#contact-company'),
     city:contactForm.querySelector('#contact-city'),
     phone:contactForm.querySelector('#contact-phone'),
-    situation:contactForm.querySelector('fieldset.contact-options'),
     subject:contactForm.querySelector('#contact-subject')
   };
-  const companyWrap=contactForm.querySelector('.contact-company');
-  const companyMark=contactForm.querySelector('.company-required');
-  const situationRadios=[...contactForm.querySelectorAll('input[name="situation"]')];
   function setContactError(key,message){
     contactForm.querySelector(`#contact-${key}-error`).textContent=message;
     if(message)fields[key].setAttribute('aria-invalid','true');
     else fields[key].removeAttribute('aria-invalid');
   }
   function selectedValue(name){return contactForm.querySelector(`input[name="${name}"]:checked`)?.value||''}
-  function updateCompany(){
-    const isEstablished=selectedValue('situation')==='Já tenho empresa';
-    companyWrap.hidden=!!selectedValue('situation')&&!isEstablished;
-    companyMark.hidden=!isEstablished;
-    fields.company.required=isEstablished;
-    if(!isEstablished)setContactError('company','');
-    setContactError('situation','');
-  }
-  situationRadios.forEach(radio=>radio.addEventListener('change',updateCompany));
   ['name','company','city','phone'].forEach(key=>fields[key].addEventListener('input',()=>setContactError(key,'')));
   fields.subject.addEventListener('change',()=>setContactError('subject',''));
   contactForm.addEventListener('submit',event=>{
     event.preventDefault();
     const data={
       name:fields.name.value.trim(),company:fields.company.value.trim(),city:fields.city.value.trim(),
-      phone:fields.phone.value.trim(),situation:selectedValue('situation'),subject:fields.subject.value,
+      phone:fields.phone.value.trim(),subject:fields.subject.value,
       message:contactForm.querySelector('#contact-message').value.trim(),preference:selectedValue('preference')
     };
     setContactError('name',data.name?'':'Informe seu nome.');
-    setContactError('company',data.situation==='Já tenho empresa'&&!data.company?'Informe o nome da empresa.':'');
+    setContactError('company','');
     setContactError('city',data.city?'':'Informe sua cidade e estado.');
     const digits=data.phone.replace(/\D/g,'');
     setContactError('phone',!data.phone?'Informe seu WhatsApp.':digits.length<10||digits.length>13?'Informe um número com DDD válido.':'');
-    setContactError('situation',data.situation?'':'Selecione sua situação.');
     setContactError('subject',data.subject?'':'Selecione o assunto.');
     const firstInvalid=Object.entries(fields).find(([,field])=>field.getAttribute('aria-invalid')==='true');
     if(firstInvalid){
-      (firstInvalid[0]==='situation'?situationRadios[0]:firstInvalid[1]).focus();
+      firstInvalid[1].focus();
       return;
     }
     const url=`https://wa.me/5541999683970?text=${encodeURIComponent(buildContactMessage(data))}`;
@@ -268,9 +253,32 @@ if(footerServices){
       menuButton.setAttribute('aria-expanded','true');
       menuButton.setAttribute('aria-label','Fechar menu');
     }
+    dropdown.classList.remove('is-dismissed');
     dropdown.classList.add('is-open');
     servicesButton.setAttribute('aria-expanded','true');
     window.scrollTo({top:0,behavior:reducedMotion.matches?'auto':'smooth'});
     servicesButton.focus({preventScroll:true});
   });
+}
+
+/* Grupos de serviços: dois painéis no desktop, acordeões nativos no mobile. */
+const serviceGroups=[...document.querySelectorAll('.service-group')];
+function updateServiceGroups(){serviceGroups.forEach(group=>{group.open=!mobileQuery.matches})}
+serviceGroups.forEach(group=>group.querySelector('summary').addEventListener('click',event=>{if(!mobileQuery.matches)event.preventDefault()}));
+mobileQuery.addEventListener('change',updateServiceGroups);
+updateServiceGroups();
+/* Compatibilidade com favoritos e links antigos para as duas frentes. */
+if(location.pathname.endsWith('/departamento-pessoal-bpo-financeiro.html')){
+  const destinations={'#departamento-pessoal':'departamento-pessoal.html','#bpo-financeiro':'bpo-financeiro.html'};
+  if(destinations[location.hash])location.replace(destinations[location.hash]);
+}
+
+/* Entradas únicas das fotos: não há estado oculto que dependa de JavaScript. */
+const editorialPhotos=[...document.querySelectorAll('.photo-reveal')];
+if('IntersectionObserver' in window && !reducedMotion.matches){
+  const photosObserver=new IntersectionObserver(entries=>{
+    entries.forEach(entry=>{if(entry.isIntersecting){entry.target.classList.add('is-photo-visible');photosObserver.unobserve(entry.target)}});
+  },{threshold:.15});
+  editorialPhotos.forEach(photo=>photosObserver.observe(photo));
+  reducedMotion.addEventListener('change',()=>{if(reducedMotion.matches)photosObserver.disconnect()});
 }

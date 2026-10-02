@@ -16,8 +16,8 @@
   <meta property="og:image" content="https://controlercontabilidade.com.br/assets/images/bg-curitiba.webp">
   <link rel="icon" href="assets/icons/favicon.svg" type="image/svg+xml">
   <link rel="preload" as="image" href="assets/images/bg-curitiba.webp" fetchpriority="high">
-  <link rel="stylesheet" href="styles.css?v=20260928-8">
-  <script src="script.js" defer></script>
+  <link rel="stylesheet" href="styles.css?v=20261002-3">
+  <script src="script.js?v=20261002-2" defer></script>
   <script type="application/ld+json">{"@context":"https://schema.org","@type":"AccountingService","name":"Controler Contabilidade","telephone":"+55 41 99968-3970","address":{"@type":"PostalAddress","streetAddress":"R. João Bettega, 513 - Conj 12 - Portão","addressLocality":"Curitiba","addressRegion":"PR","postalCode":"81070-000","addressCountry":"BR"},"openingHoursSpecification":[{"@type":"OpeningHoursSpecification","dayOfWeek":["Monday","Tuesday","Wednesday","Thursday","Friday"],"opens":"08:30","closes":"17:30"}],"areaServed":{"@type":"Country","name":"Brasil"}}</script>
 </head>
 <body>
@@ -30,7 +30,7 @@
         <a href="#quem-somos">Quem Somos</a>
         <div class="dropdown" id="services-dropdown">
           <button class="dropdown-trigger" type="button" aria-haspopup="true" aria-expanded="false" aria-controls="services-menu">Serviços <span aria-hidden="true">▾</span></button>
-          <div class="dropdown-panel" id="services-menu"><a href="abertura-de-empresa.html">Abertura de Empresa</a><a href="troca-de-contador.html">Troca de Contador</a><a href="planejamento-tributario.html">Planejamento Tributário</a><a href="departamento-pessoal-bpo-financeiro.html">Departamento Pessoal e BPO Financeiro</a><a href="imposto-de-renda.html">Imposto de Renda</a></div>
+          <div class="dropdown-panel" id="services-menu"><details class="service-group" open><summary>Para empresas</summary><div class="service-group-links"><a href="abertura-de-empresa.html#constituicao">Abertura, alterações e baixa de empresa</a><a href="servicos-empresariais.html#impostos">Regularização de impostos</a><a href="servicos-empresariais.html#dados-cadastrais">Regularização de dados cadastrais</a><a href="servicos-empresariais.html#licenciamentos">Licenciamentos</a><a href="servicos-empresariais.html#declaracoes">Declarações mensais e anuais obrigatórias</a><a href="servicos-empresariais.html#consultorias">Consultorias</a><a href="servicos-empresariais.html#contabilidade">Contabilidade completa para empresas do Simples Nacional e Lucro Presumido</a><a href="servicos-empresariais.html#mei">Serviços para MEI em geral</a><a href="departamento-pessoal.html">Departamento Pessoal</a><a href="bpo-financeiro.html">BPO Financeiro</a><a href="troca-de-contador.html">Troca de Contador</a><a href="planejamento-tributario.html">Planejamento Tributário</a></div></details><details class="service-group" open><summary>Para pessoa física</summary><div class="service-group-links"><a href="imposto-de-renda.html">Imposto de Renda</a><a href="imposto-de-renda.html#regularizacao-ir">Regularização de declarações de IR</a><a href="imposto-de-renda.html#autonomo">Cadastro, alteração e baixa de cadastro de autônomo</a><a href="imposto-de-renda.html#esocial-domestico">eSocial doméstico</a></div></details></div>
         </div>
         <a href="#depoimentos">Depoimentos</a><a href="#galeria">Galeria</a><a href="#atendimento">Atendimento</a>
         <a class="button button-red header-cta" href="https://wa.me/5541999683970?text=Ol%C3%A1%2C%20quero%20solicitar%20atendimento%20da%20Controler%20Contabilidade." target="_blank" rel="noopener noreferrer">Solicitar Atendimento</a>
@@ -80,12 +80,12 @@
     </section>
     <section class="about" id="quem-somos" aria-labelledby="about-title">
       <div class="about-inner">
-        <p class="about-eyebrow">QUEM SOMOS</p>
+        <div class="about-opening"><div class="about-opening-copy">        <p class="about-eyebrow">QUEM SOMOS</p>
         <div class="about-heading-row">
           <h2 id="about-title">Sua contabilidade precisa trazer clareza, não mais dúvidas.</h2>
-          <p class="about-since"><span>DESDE</span><strong>1992</strong></p>
         </div>
         <p class="about-intro">Desde fevereiro de 1992, a Controler Contabilidade atende empresas em Curitiba e online em todo o Brasil. Nossa atuação reúne as áreas contábil, fiscal e trabalhista para que o empresário tenha orientação ao lidar com obrigações, pendências e decisões do negócio.</p>
+</div><figure class="about-photo photo-reveal"><img class="" src="assets/images/ilustracao-consultoria.webp" srcset="assets/images/ilustracao-consultoria-720.webp 720w, assets/images/ilustracao-consultoria.webp 1440w" sizes="(max-width: 767px) 100vw, 50vw" width="1440" height="960" alt="Imagem ilustrativa de dois homens analisando documentos financeiros." loading="lazy" decoding="async"><figcaption><p class="about-since"><span>DESDE</span><strong>1992</strong></p></figcaption></figure></div>
         <div class="about-grid">
           <article class="about-card">
             <span class="about-number" aria-hidden="true">01</span>
@@ -113,6 +113,10 @@
           </div>
         </div>
       </div>
+    </section>
+    <section class="switch-callout" aria-labelledby="switch-callout-title">
+      <div class="switch-callout-visual photo-reveal"><img class="" src="assets/images/ilustracao-troca-contador.webp" srcset="assets/images/ilustracao-troca-contador-720.webp 720w, assets/images/ilustracao-troca-contador.webp 1440w" sizes="(max-width: 767px) 100vw, 75vw" width="1440" height="960" alt="Imagem ilustrativa de uma mulher trabalhando em um notebook." loading="lazy" decoding="async"></div>
+      <div class="switch-callout-inner"><div class="switch-callout-copy"><h2 id="switch-callout-title">Pensando em trocar de contador?</h2><p>Conheça o atendimento da Controler e converse sobre as necessidades da sua empresa.</p><a class="button button-red" href="troca-de-contador.html">Conhecer a troca de contador</a></div></div>
     </section>
     <section class="testimonials" id="depoimentos" aria-labelledby="testimonials-title">
       <div class="testimonials-inner">
@@ -213,10 +217,13 @@
     </dialog>
     <section class="contact" id="atendimento" aria-labelledby="contact-title">
       <div class="contact-inner">
-        <div class="contact-intro">
+        <div class="contact-heading">
           <p class="contact-eyebrow">ATENDIMENTO</p>
           <h2 id="contact-title">Como podemos te ajudar?</h2>
           <p class="contact-description">Conte um pouco sobre seu negócio e o assunto em que precisa de ajuda. Assim, nossa equipe pode iniciar uma conversa mais objetiva com você.</p>
+        </div>
+        <div class="contact-intro">
+          <figure class="contact-photo photo-reveal"><img class="" src="assets/images/ilustracao-atendimento.webp" srcset="assets/images/ilustracao-atendimento-720.webp 720w, assets/images/ilustracao-atendimento.webp 1536w" sizes="(max-width: 1099px) min(700px, 92vw), 50vw" width="1536" height="1024" alt="Imagem ilustrativa de dois homens e uma mulher conversando sobre documentos em uma mesa." loading="lazy" decoding="async"></figure>
           <ul class="contact-details">
             <li><svg viewBox="0 0 32 32" aria-hidden="true" focusable="false"><path d="M16 29s9-9.3 9-17a9 9 0 0 0-18 0c0 7.7 9 17 9 17Z"/><circle cx="16" cy="12" r="3"/></svg><span>Presencial no bairro Portão, em Curitiba</span></li>
             <li><svg viewBox="0 0 32 32" aria-hidden="true" focusable="false"><rect x="4" y="5" width="24" height="17" rx="2"/><path d="M2 26h28M13 22v4m6-4v4"/></svg><span>Online para todo o Brasil</span></li>
@@ -226,11 +233,10 @@
         <div class="contact-panel">
           <form class="contact-form" id="contact-form" novalidate>
             <div class="contact-field"><label for="contact-name">Seu nome <span aria-hidden="true">*</span></label><input id="contact-name" name="name" type="text" autocomplete="name" required aria-describedby="contact-name-error"><span class="contact-error" id="contact-name-error"></span></div>
-            <div class="contact-field contact-company"><label for="contact-company">Nome da empresa <span class="company-required" aria-hidden="true" hidden>*</span></label><input id="contact-company" name="company" type="text" autocomplete="organization" aria-describedby="contact-company-error"><span class="contact-error" id="contact-company-error"></span></div>
+            <div class="contact-field contact-company"><label for="contact-company">Nome da empresa <span class="contact-optional">(opcional)</span></label><input id="contact-company" name="company" type="text" autocomplete="organization" aria-describedby="contact-company-error"><span class="contact-error" id="contact-company-error"></span></div>
             <div class="contact-field"><label for="contact-city">Cidade e estado <span aria-hidden="true">*</span></label><input id="contact-city" name="city" type="text" autocomplete="address-level2" placeholder="Ex.: Curitiba - PR" required aria-describedby="contact-city-error"><span class="contact-error" id="contact-city-error"></span></div>
             <div class="contact-field"><label for="contact-phone">Seu WhatsApp <span aria-hidden="true">*</span></label><input id="contact-phone" name="phone" type="tel" inputmode="tel" autocomplete="tel" placeholder="Ex.: (41) 98888-7777" required aria-describedby="contact-phone-error"><span class="contact-error" id="contact-phone-error"></span></div>
-            <fieldset class="contact-field contact-options" aria-describedby="contact-situation-error"><legend>Qual é a sua situação? <span aria-hidden="true">*</span></legend><div class="contact-choices"><label><input type="radio" name="situation" value="Vou abrir uma empresa" required><span>Vou abrir uma empresa</span></label><label><input type="radio" name="situation" value="Já tenho empresa"><span>Já tenho empresa</span></label><label><input type="radio" name="situation" value="Sou pessoa física"><span>Sou pessoa física</span></label></div><span class="contact-error" id="contact-situation-error"></span></fieldset>
-            <div class="contact-field"><label for="contact-subject">Em que podemos ajudar? <span aria-hidden="true">*</span></label><select id="contact-subject" name="subject" required aria-describedby="contact-subject-error"><option value="">Selecione um assunto</option><option>Troca de contador</option><option>Abertura de empresa</option><option>Contabilidade</option><option>Fiscal e tributário</option><option>Departamento pessoal</option><option>Imposto de Renda</option><option>Outro assunto</option></select><span class="contact-error" id="contact-subject-error"></span></div>
+            <div class="contact-field"><label for="contact-subject">Em que podemos ajudar? <span aria-hidden="true">*</span></label><select id="contact-subject" name="subject" required aria-describedby="contact-subject-error"><option value="">Selecione um assunto</option><optgroup label="Para empresas"><option>Abertura, alterações e baixa de empresa</option><option>Regularização de impostos</option><option>Regularização de dados cadastrais</option><option>Licenciamentos</option><option>Declarações mensais e anuais obrigatórias</option><option>Consultorias</option><option>Contabilidade completa para empresas do Simples Nacional e Lucro Presumido</option><option>Serviços para MEI em geral</option><option>Departamento Pessoal</option><option>BPO Financeiro</option><option>Troca de Contador</option><option>Planejamento Tributário</option></optgroup><optgroup label="Para pessoa física"><option>Imposto de Renda</option><option>Regularização de declarações de IR</option><option>Cadastro, alteração e baixa de cadastro de autônomo</option><option>eSocial doméstico</option></optgroup><option>Outro assunto</option></select><span class="contact-error" id="contact-subject-error"></span></div>
             <div class="contact-field"><label for="contact-message">Conte brevemente o que você precisa</label><textarea id="contact-message" name="message" rows="3" placeholder="Digite sua mensagem aqui..."></textarea></div>
             <fieldset class="contact-field contact-options" aria-describedby="contact-preference-error"><legend>Como prefere ser atendido?</legend><div class="contact-choices contact-choices-short"><label><input type="radio" name="preference" value="Online"><span>Online</span></label><label><input type="radio" name="preference" value="Presencial"><span>Presencial</span></label></div><span class="contact-error" id="contact-preference-error"></span></fieldset>
             <button class="contact-submit" type="submit">Continuar pelo WhatsApp</button>
