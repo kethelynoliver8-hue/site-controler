@@ -16,7 +16,7 @@ dropdown.addEventListener('mouseenter',()=>{if(!mobileQuery.matches){dropdown.cl
 dropdown.addEventListener('mouseleave',()=>{if(!mobileQuery.matches&&!dropdown.classList.contains('is-open'))servicesButton.setAttribute('aria-expanded','false')});
 dropdown.addEventListener('focusout',event=>{if(!mobileQuery.matches&&!dropdown.contains(event.relatedTarget))closeDropdown()});
 document.addEventListener('pointerdown',event=>{if(!dropdown.contains(event.target))closeDropdown();if(mobileQuery.matches&&!event.target.closest('.nav-bar'))closeMenu()});
-document.addEventListener('keydown',event=>{if(event.key==='Escape'&&!document.querySelector('.gallery-dialog[open]')){closeMenu();if(mobileQuery.matches)menuButton.focus();else servicesButton.focus()}});
+document.addEventListener('keydown',event=>{if(event.key==='Escape'){closeMenu();if(mobileQuery.matches)menuButton.focus();else servicesButton.focus()}});
 menu.querySelectorAll('a').forEach(link=>link.addEventListener('click',()=>{if(link.dataset.service){const text=`Olá, gostaria de informações sobre ${link.dataset.service} na Controler Contabilidade.`;window.open(`https://wa.me/5541999683970?text=${encodeURIComponent(text)}`,'_blank','noopener,noreferrer')}if(mobileQuery.matches)closeMenu()}));
 mobileQuery.addEventListener('change',closeMenu);
 
@@ -149,42 +149,6 @@ if(testimonialsStage){
     if(Math.abs(dx)>55 && Math.abs(dx)>Math.abs(dy)*1.4)showReview(currentReview+(dx<0?1:-1));
   },{passive:true});
   testimonialsStage.addEventListener('touchcancel',()=>{touchStart=null});
-}
-
-/* Galeria modal: seis fotos reais, troca manual e restauração do foco ao fechar. */
-const galleryDialog=document.querySelector('.gallery-dialog');
-if(galleryDialog && typeof galleryDialog.showModal==='function'){
-  const photos=[...document.querySelectorAll('.gallery-sources li')].map(item=>({src:item.dataset.src,alt:item.dataset.alt}));
-  const galleryImage=galleryDialog.querySelector('.gallery-view img');
-  const galleryCount=galleryDialog.querySelector('.gallery-count');
-  let galleryIndex=0;
-  let galleryOpener=null;
-  function showPhoto(index){
-    galleryIndex=(index+photos.length)%photos.length;
-    galleryImage.src=photos[galleryIndex].src;
-    galleryImage.alt=photos[galleryIndex].alt;
-    galleryCount.textContent=`${String(galleryIndex+1).padStart(2,'0')} / ${String(photos.length).padStart(2,'0')}`;
-  }
-  document.querySelectorAll('[data-gallery-index]').forEach(link=>link.addEventListener('click',event=>{
-    event.preventDefault();
-    galleryOpener=link;
-    showPhoto(Number(link.dataset.galleryIndex));
-    galleryDialog.showModal();
-    document.body.classList.add('gallery-open');
-    galleryDialog.querySelector('.gallery-close').focus();
-  }));
-  galleryDialog.querySelector('.gallery-prev').addEventListener('click',()=>showPhoto(galleryIndex-1));
-  galleryDialog.querySelector('.gallery-next').addEventListener('click',()=>showPhoto(galleryIndex+1));
-  galleryDialog.querySelector('.gallery-close').addEventListener('click',()=>galleryDialog.close());
-  galleryDialog.addEventListener('keydown',event=>{
-    if(event.key==='ArrowLeft'){event.preventDefault();showPhoto(galleryIndex-1)}
-    if(event.key==='ArrowRight'){event.preventDefault();showPhoto(galleryIndex+1)}
-  });
-  galleryDialog.addEventListener('close',()=>{
-    document.body.classList.remove('gallery-open');
-    galleryImage.removeAttribute('src');
-    if(galleryOpener)galleryOpener.focus();
-  });
 }
 
 /* O formulário prepara a conversa; o visitante confirma o envio no WhatsApp. */
