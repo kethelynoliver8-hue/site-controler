@@ -203,6 +203,8 @@ if(contactForm){
       return;
     }
     const url=`https://wa.me/5541999683970?text=${encodeURIComponent(buildContactMessage(data))}`;
+    // Conversão somente após a validação, uma vez por envio válido.
+    if(typeof window.controlerTrackWhatsApp==='function')window.controlerTrackWhatsApp();
     window.open(url,'_blank','noopener,noreferrer');
   });
 }

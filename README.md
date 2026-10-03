@@ -86,3 +86,20 @@ Os estilos específicos estão no bloco “Fotografias ilustrativas na home” d
 
 ## Nosso escritório
 A seção da home mantém a âncora `#galeria` para compatibilidade. A arte completa está em `assets/images/nosso-escritorio.webp`, otimizada a partir do original de 1450 × 1085 px com qualidade 96. Para substituí-la, atualize o arquivo, o texto alternativo e as dimensões do `<img>` em `index.html`. A largura máxima de 820 px equilibra altura e legibilidade, sem recorte. O endereço e o link Como chegar estão em `.office-details`. O mosaico, o modal, os controles e os seis assets antigos foram removidos. A entrada reutiliza o observador `.photo-reveal` e respeita movimento reduzido.
+
+
+## Google Ads — atualização de 03/10/2026
+
+Tag: `AW-18028044871`. Conversão existente “Botão do WhatsApp”: `AW-18028044871/GXlKCK_5-oscEMfEuJRD`.
+
+Todas as páginas carregam `google-ads.js` e a biblioteca oficial do Google. A exceção de domínio externo é necessária para a medição. A inicialização e os eventos ficam em arquivo JS separado, sem JS inline. Não adicionar a mesma conversão novamente via GTM.
+
+A conversão é enviada uma vez por clique nos links de WhatsApp (cabeçalho, CTAs, rodapé, flutuante) ou por envio válido do formulário. Visitas, links internos e formulário inválido não disparam conversão. Mede intenção de contato, não confirmação de mensagem enviada. Os dados preenchidos e a mensagem não são enviados como parâmetros da conversão.
+
+### Publicar e verificar
+1. Substituir os arquivos do site no GitHub pelo conteúdo da pasta do ZIP, incluindo `google-ads.js`. Manter o arquivo CNAME já existente e as configurações de domínio.
+2. Aguardar o deploy do GitHub Pages.
+3. Abrir Tag Assistant, conectar ao domínio e conferir o ID acima. Testar um link de WhatsApp e um formulário válido: cada ação deve registrar exatamente um evento conversion com o send_to acima. Testar formulário vazio, navegação e recarregamento: nenhum evento conversion.
+4. Conferir também uma página interna e mobile. Bloqueadores podem impedir a medição, mas os contatos devem continuar funcionando.
+
+A verificação local cobre o código e a fila de eventos; a recepção pelo Google precisa ser validada após publicar.
